@@ -59,7 +59,7 @@ public class TileManager {
 			while(col < gp.maxWorldCol && row< gp.maxWorldRow) {
 				String line = br.readLine();
 				
-				while(col < gp.maxScreenCol && row< gp.maxScreenRow) {
+				while(col < gp.maxWorldCol && row< gp.maxWorldRow) {
 					String numbers[] = line.split(" ");
 					
 					int num = Integer.parseInt(numbers[col]);
@@ -67,7 +67,7 @@ public class TileManager {
 					col++;
 					
 				}
-				if(col == gp.maxScreenCol) {
+				if(col == gp.maxWorldCol) {
 					col = 0;
 					row++;
 				}
@@ -82,8 +82,24 @@ public class TileManager {
 	public void draw(Graphics2D g2) {
 		int worldCol=0;
 		int worldRow=0;
-
-		
+//		int col = 0;
+//		int row = 0;
+//		int x =0;
+//		int y =0;
+//		while(col<gp.maxScreenCol && row<gp.maxScreenRow) {
+//			int tileNum = mapTileNum[col][row];
+//			g2.drawImage(tile[tileNum].image, x,y , gp.tileSize, gp.tileSize, null);
+//			col++;
+//			x += gp.tileSize;
+//			if(col == gp.maxScreenCol) {
+//				col = 0;
+//				x = 0;
+//				row++;
+//				y+=gp.tileSize;
+//			}
+//		}
+//		
+//		
 		while(worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
 			int tileNum = mapTileNum[worldCol][worldRow];
 			int worldX = worldCol*gp.tileSize;
@@ -102,6 +118,7 @@ public class TileManager {
 
 			}
 		}
+		
 		
 	}
 	
