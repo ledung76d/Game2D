@@ -4,25 +4,16 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import entity.Entity;
 import main.GamePanel;
 
-public class OBJ_Key extends SuperObject{
+public class OBJ_Key extends Entity{
 	
 	GamePanel gp;
 	public OBJ_Key(GamePanel gp) {
+		super(gp);
 		name = "Key";
-		this.gp = gp;
-		
-		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/objects/key.png"));
-			uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-			
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
-		collision = true;
-	}
-	
-	
-	
+		down1 = setup("/objects/key", gp.tileSize, gp.tileSize);
+		description = "[" + name +"]\nIt open the door.";
+	}	
 }
