@@ -16,6 +16,7 @@ import main.KeyHandler;
 import main.UtilityTool;
 import object.OBJ_Fireball;
 import object.OBJ_Key;
+import object.OBJ_Rock;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
 
@@ -66,9 +67,12 @@ public class Player extends Entity{
 		direction="down";
 		
 		//PLAYER STATUS
+		level = 1;
 		maxLife = 6;
 		life = maxLife;
-		level = 1;
+		maxMana = 4;
+		mana = maxMana;
+		ammo = 10;
 		strength = 1;
 		dexterity = 1;
 		exp = 0;
@@ -76,8 +80,8 @@ public class Player extends Entity{
 		coin = 0;
 		currentWeapon = new OBJ_Sword_Normal(gp);
 		currentShield = new OBJ_Shield_Wood(gp);
-		projectile = new OBJ_Fireball(gp);
-		
+		//projectile = new OBJ_Fireball(gp);
+		projectile = new OBJ_Rock(gp);
 		attack  = getAttack();	// The total attack value is decided by strength and weapon
 		defense = getDefense(); // The total defense value is decided by dexterity and shield
 		
@@ -213,10 +217,14 @@ public class Player extends Entity{
 						
 		}
 		
-		if(gp.keyH.shotKeyPressed == true && projectile.alive == false&& shotAvailableCounter == 30) {
+		if(gp.keyH.shotKeyPressed == true && projectile.alive == false
+				&& shotAvailableCounter == 30 && projectile.haveResource(this) == true) {
 			
 			//Set default coordinates, direction and user
 			projectile.set(worldX, worldY, direction, true,this);
+			
+			//Subtract the cost (Mana, Ammo ETC.)
+			projectile.subtractResource(this);
 			
 			shotAvailableCounter = 0;
 			
